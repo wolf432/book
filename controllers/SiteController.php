@@ -17,9 +17,9 @@ class SiteController extends Controller
     }
 
     public function actionBook($id){
-        $book = Book::find($id)->one();
+        $book = Book::find()->where(['origin_id' => $id])->one();
         $articleModel = new Article();
-        $list = $articleModel->find(['book_id' => $id])->select('title, id, create_time')->all();
+        $list = $articleModel->find()->where(['book_id' => $id])->select('title, id, create_time')->all();
         return $this->render('book', ['list' => $list, 'book' => $book]);
     }
 
